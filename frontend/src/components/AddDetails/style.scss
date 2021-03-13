@@ -1,0 +1,64 @@
+/**
+Add details
+*/
+.add-details-section {
+  color: #0B0A3C;
+  padding: 0px 80px 95px 80px;
+  @media (max-width: 576px) {
+    padding: 20px;
+  }
+
+  > .title {
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 24px;
+  }
+
+  .detail-item-section {
+    margin-bottom: 41px;
+    > .sub-title {
+      font-weight: bold;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    > .description {
+      font-weight: normal;
+      font-size: 16px;
+      opacity: 0.7;
+      margin-bottom: 24px;
+    }
+    .input-section {
+      background: #F6F6FA;
+      border-radius: 100px;
+      .input-name {
+        border-radius: 100px;
+        outline: none !important;
+        border: none;
+        width: 100%;
+        background: #F6F6FA;
+        padding: 21px 24px;
+        font-weight: normal;
+        font-size: 14px;
+        opacity: 0.6;
+      }
+    }
+    .user-img-upload-section {
+      margin: 5px 0px;
+      input {
+        display: none;
+      }
+      button {
+        label {
+          cursor: pointer;
+          margin-bottom: 0px;
+        }
+        width: 170px;
+        height: 45px;
+        @media (max-width: 576px) {
+          width: 100%;
+        }
+      }
+    }
+  }
+    
+}

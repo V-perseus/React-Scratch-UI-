@@ -1,0 +1,65 @@
+/**
+Liquidity generation time section
+*/
+.liquidity-time-section {
+  background: #F6F6FA;
+  padding: 65px 0px 45px 0px;
+  
+  .content {
+    padding: 55px 75px;
+    @media (max-width: 576px) {
+      padding: 40px 20px;
+    }
+
+    .percent-bar-section {
+      height: 32px;
+      border-radius: 100px;
+      background: #ECECF3;
+      margin-bottom: 40px;
+      .percent-bar {
+        background: linear-gradient(85.93deg, #4F4CD1 -1.39%, #B989F8 100%);
+        border-radius: 100px;
+        transition: all 0.3s;
+      }
+    }
+
+    .time-section {
+      .date {
+        font-weight: 600;
+        font-size: 50px;
+        text-align: center;
+        &.active {
+          font-size: 70px;
+        }
+      }
+      .date-unit {
+        font-weight: 600;
+        font-size: 13px;
+        text-align: center;
+        text-transform: uppercase;
+      }
+    }
+
+    .btn-section {
+      p {
+        font-weight: 600;
+        font-size: 15px;
+        text-align: center;
+        text-transform: capitalize;
+        margin-bottom: 7px;
+      }
+      button {
+        width: 175px;
+        height: 62px;
+        &.refund-btn {
+          margin-right: 23px;
+        }
+        @media (max-width: 576px) {
+          margin: 15px auto;
+        }
+      }
+    }
+
+  }
+
+}
