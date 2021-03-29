@@ -42,11 +42,9 @@ export const HeadUpDownIcon = styled.img`
 `;
 
 export const FirstTd = styled.td`
-  display: flex;
-  align-items: center;
   min-height: 65px;
-  padding: 25px 30px;
-  &>img {
+  padding: 19px 30px 14px 30px;
+  & img {
     width: 40px;
     height: 40px;
   }
@@ -78,53 +76,48 @@ export const BodyUpDownIcon = styled.img`
 `;
 
 export const Td = styled.td`
-  padding: 25px 30px;
+  padding: 28px 30px 14px 30px;
 `;
 
 export const PercentTd = styled.td`
-  padding: 0px 20px 14px 30px;
+  padding: 0px 30px 18px 0px;
+  &>div {
+    padding: 6px 18px 6px 0px;
+    &.leaderboard {
+      background: #F6F6FA;
+      border-radius: 1000px;
+    }
+  }
 `;
 
 export const SymbolDivTag = styled.div`
   display: flex;
-  margin-left: 15px;
+  align-items: center;
 `;
 
 export const SymbolSpanTag = styled(Span)`
   font-weight: bold;
-  font-size: 11px;
+  font-size: 14px;
   margin-left: 5px;
 `;
 
 export const SymbolImgTag = styled.img`
-  width: 18px;
-  height: 18px;
+  width: 28px;
+  height: 28px;
 `;
 
 export const PercentSpanTag = styled(Span)`
-  font-size: 11px;
+  font-size: 14px;
   margin-left: 5px;
-`;
-
-export const OverlayDiv = styled.div`
-  display: flex;
-  margin-right: -10px;
+  @media (max-width: 576px) {
+    margin-right: 15px;
+  }
 `;
 
 export const OverlaySpanTag = styled(Span)`
   font-weight: bold;
-  font-size: 11px;
+  font-size: 14px;
   margin-left: 15px;
-`;
-
-export const PercentColorDiv = styled.div`
-  display: flex;
-  width: 100%;
-  height: 6px;
-  background-color: #F4F4FA;
-  border-radius: 5px;
-  overflow: hidden;
-  margin-top: 10px;
 `;
 
 export const TableBlock = styled.div`
@@ -139,11 +132,65 @@ export const RiskDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 58px;
-  height: 25pxf;
+  padding: 4px 15px;
   background: #F6F6FA;
   border-radius: 10px;
   font-weight: 500;
   font-size: 12px;
   color: #000000;
+  white-space: nowrap;
+`;
+
+export const NumberTh = styled.th`
+  padding-left: 15px;
+  & > div {
+    width: 39px;
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & > div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-weight: 900;
+      font-size: 16px;
+      color: #000000;
+      &.num-1 {
+        width: 100%;
+        height: 100%;
+        background: #FAD557;
+        background: linear-gradient(90deg, #FCB12B 50%, #FAD557 50%);
+        color: white;
+        font-size: 25px;
+      }
+      &.num-2 {
+        width: 33px;
+        height: 33px;
+        background: linear-gradient(90deg, #FCB12B 50%, #FAD557 50%);
+        color: white;
+        font-size: 20px;
+      }
+      &.num-3 {
+        width: 28px;
+        height: 28px;
+        background: linear-gradient(90deg, #FCB12B 50%, #FAD557 50%);
+        color: white;
+      }
+    }
+    
+  }
+`;
+
+export const NoData = styled.div`
+  width: 100%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+  font-weight: 600;
+  background-color: white;
+  border-radius: 50px;
 `;

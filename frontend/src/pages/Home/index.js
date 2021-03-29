@@ -14,7 +14,8 @@ const Home = () => {
   const tableProps = {
     typeExplore: typeExplore,
     setTypeExplore: setTypeExplore,
-    isFlag: false
+    isFlag: false,
+    byTypeExplore: byTypeExplore
   }
 
   return (

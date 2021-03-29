@@ -8,6 +8,7 @@ export const Content = styled.div`
 
 export const FilterSection = styled(BetweenDiv)`
   flex-direction: row;
+  margin-bottom: 25px;
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
@@ -45,7 +46,7 @@ export const CurrencyUnit = styled(Span)`
   position: relative;
   &:before {
     position: absolute;
-    bottom: -1px !important;
+    bottom: -4px !important;
     height: 2px;
     content: '';
     background-color: #4F4CD1 !important;
@@ -62,15 +63,50 @@ export const CurrencyUnit = styled(Span)`
   }
 `;
 
-export const CreateIndex = styled.div`
-  font-weight: bold;
-  font-size: 16px;
-  background: linear-gradient(85.93deg,#4F4CD1 -1.39%,#B989F8 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-right: 37px;
-  @media (max-width: 768px) {
-    display: none;
+export const FilterBlock = styled.div`
+  padding: 13px 10px 25px 10px;
+  position: absolute;
+  background: #FFFFFF;
+  box-shadow: 0px 15px 29px rgba(217, 217, 236, 0.519477);
+  border-radius: 20px;
+  width: 317px;
+  z-index: 10;
+  overflow: hidden;
+`;
+
+export const Item = styled.label`
+  transition: all 0.3s;
+  width: 100%;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0px;
+  cursor: pointer;
+  & > .checkbox-section {
+    display: flex;
+    align-items: center;
+    margin-right: 25px;
+    input {
+      width: 23px;
+      height: 23px;
+    }
+  }
+  & > .img-display-section {
+    display: flex;
+    align-items: center;
+    > img {
+      width: 28px;
+      height: 28px;
+    }
+    > span {
+      margin-left: 10px;
+      font-weight: normal;
+      font-size: 14px;
+    }
+  }
+
+  &:hover {
+    background: rgba(0,0,0,.05);
+    color: rgba(0,0,0,.95);
   }
 `;

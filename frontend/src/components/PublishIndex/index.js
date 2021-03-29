@@ -3,11 +3,11 @@ import './style.scss';
 import { imageUpload } from '../../rest/api';
 
 const PublishIndex = (props) => {
-  const { tokenVal, details, setCurrentStep, userImg } = props;
+  const { tokenVal, details, userImg } = props;
 
-  /****** Login ******/
-  const logIn = () => {
-    // to do here for login
+  /****** creatIndex ******/
+  const creatIndex = () => {
+    // to do here to create Index
     imageUpload(userImg)
       .then(data => { console.log(data) })
       .catch(error => { console.log(JSON.stringify(error)) });
@@ -17,11 +17,16 @@ const PublishIndex = (props) => {
     <div className="publish-index-section">
       <div className="token-info-section">
         <div className="row">
-          <div className="col-md-5 detail-section">
-            <p className="name">{details['name']}</p>
-            <p className="symbol">{details['symbol']}</p>
-            <p className="price">${details['price']}</p>
-            <p className="edit-set" onClick={() => setCurrentStep(1)}>Edit set</p>
+          <div className="col-md-5 detail-section d-flex align-items-center">
+            <div className="img-section">
+              <img src={userImg} alt="userIndexImg" />
+            </div>
+            <div className="d-flex align-items-center">
+              <div>
+                <p className="name">{details['name']}</p>
+                <p className="symbol mb-0">{details['symbol']}</p>
+              </div>
+            </div>
           </div>
           <div className="col-md-7 token-section">
             {
@@ -50,7 +55,7 @@ const PublishIndex = (props) => {
         <p className="price">$456.87</p>
       </div>
       <div className="login-btn-section">
-        <button className="w-100 fill-btn" onClick={logIn}>Log in</button>
+        <button className="w-100 fill-btn" onClick={creatIndex}>Create index</button>
       </div>
     </div>
   )

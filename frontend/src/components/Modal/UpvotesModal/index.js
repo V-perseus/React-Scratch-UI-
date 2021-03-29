@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import './style.scss';
-import closeBtnImg from '../../../assets/img/closebtn.svg'
+import closeBtnImg from '../../../assets/img/closebtn.svg';
 import checkGreenBgImg from '../../../assets/img/check-green-bg.svg';
-import arrowLeftImg from '../../../assets/img/arrow-left.svg';
+import arrowLeftImg from '../../../assets/img/backIcon.svg';
+import downArrowLg from '../../../assets/img/downArrowLg.svg';
 import { currencyUnits } from '../../../dumy';
 
 const UpvotesModal = (props) => {
@@ -24,7 +25,7 @@ const UpvotesModal = (props) => {
   }, [isDropdown])
 
   const closeSelect = (evt) => {
-    if (evt.target.className === "open-dropdown") return;
+    if (evt.target.closest('.open-dropdown')) return;
     setIsDropdown(false);
   }
 
@@ -71,20 +72,28 @@ const UpvotesModal = (props) => {
                 </div>
                 <div>
                   <div>
-                    <div className="position-relative text-center">
-                      <div className="mx-auto input-section">
+                    <div className="position-relative text-center cost-input-section">
+                      <div className="input-section d-flex align-items-center justify-content-center">
                         <span>Buy</span>
-                        <input type="text" placeholder="0" name="amount" value={amount} onChange={handleChange} />
+                        <div className="input-block">
+                          <input type="text" placeholder="0" name="amount" autoComplete="off" onKeyPress={(e) => e.target.style.width = ((e.target.value.length + 1) * 35) + 'px'} value={amount} onChange={handleChange} />
+                          <div className="border-div w-100"></div>
+                        </div>
                         <span>DPI</span>
                       </div>
                     </div>
                     <div className="position-relative text-center">
-                      <div className="mx-auto currency-section">
-                        <span>pay</span>
-                        <input type="text" placeholder="0" />
+                      <div className="currency-section d-flex align-items-center justify-content-center">
+                        <span>Pay</span>
+                        <div className="input-section">
+                          <input type="text" placeholder="0" onKeyPress={(e) => e.target.style.width = ((e.target.value.length + 1) * 20) + 'px'} />
+                          <div className="border-div"></div>
+                        </div>
                         <span>{currencySet}</span>
                         <div className="currency-change-btn">
-                          <img alt="Downward chevron" className="open-dropdown" src="https://www.tokensets.com/static/media/down-chevron-gray.96e9584f.svg" onClick={() => setIsDropdown(true)} />
+                          <div className="open-dropdown" onClick={() => setIsDropdown(true)}>
+                            <img alt="Downward chevron" src="https://www.tokensets.com/static/media/down-chevron-gray.96e9584f.svg" />
+                          </div>
                           {
                             isDropdown &&
                             <div className="dropdown">
@@ -117,7 +126,7 @@ const UpvotesModal = (props) => {
                       </div>
                     </div>
                     <div className="col-md-7 currency-part">
-                      <div className="text-right">
+                      <div className="detail">
                         <span className="amount">0</span>
                         <span className="currency"> {currencySet}</span>
                         <p>$0.00</p>
@@ -125,22 +134,25 @@ const UpvotesModal = (props) => {
                     </div>
                   </div>
                 </div>
-                <button className={amount === '' ? 'preview-btn custom-btn disable' : 'preview-btn custom-btn'} onClick={goConfirmStep}>Preview Buy</button>
+                <div className="text-center">
+                  <button className={amount === '' ? 'preview-btn fill-btn disable' : 'preview-btn fill-btn'} onClick={goConfirmStep}>Preview Buy</button>
+                </div>
               </div>
             </div> :
 
             // confirm Buy section
             <div className="confirm-step">
-              <div className="back-icon d-flex align-items-center justify-content-center" onClick={() => setIsConfirmStep(false)}>
-                <img src={arrowLeftImg} alt="arrowLeft" />
-              </div>
+              <img src={arrowLeftImg} className="back-icon" alt="arrowLeft" onClick={() => setIsConfirmStep(false)} />
               <h2 className="title text-center">Confirm Buy</h2>
               <div>
                 <table className="w-100">
                   <tbody>
                     <tr>
                       <td>
-                        <div className="d-flex align-items-center">
+                        <div className="d-flex align-items-center position-relative">
+                          <div className="position-absolute down-arrow-section">
+                            <img src={downArrowLg} alt="downArrow" />
+                          </div>
                           <img src="https://set-core.s3.amazonaws.com/img/social_trader_set_icons/defi_pulse_index_set.svg" alt="set icon" />
                           <div className="d-flex flex-column">
                             <span>{currencySet}</span>
@@ -190,7 +202,9 @@ const UpvotesModal = (props) => {
                   </tbody>
                 </table>
               </div>
-              <button className="preview-btn custom-btn" onClick={paymentSubmit}>Submit Buy</button>
+              <div className="text-center">
+                <button className="preview-btn fill-btn" onClick={paymentSubmit}>Submit Buy</button>
+              </div>
             </div>
         }
 

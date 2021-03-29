@@ -71,7 +71,7 @@ const UserPage = () => {
             <table>
               <thead>
                 <tr>
-                  <th>Coins</th>
+                  <th>Wallet balance</th>
                   <th></th>
                   <th></th>
                 </tr>

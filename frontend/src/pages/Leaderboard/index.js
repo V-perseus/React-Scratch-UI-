@@ -13,7 +13,8 @@ const Leaderboard = () => {
   const tableProps = {
     typeExplore: typeExplore,
     setTypeExplore: setTypeExplore,
-    isFlag: true
+    isFlag: true,
+    byTypeExplore: byTypeExplore
   }
 
   return (

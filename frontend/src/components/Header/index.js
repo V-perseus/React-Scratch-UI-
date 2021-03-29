@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import LogoImg from '../../assets/img/logo.png';
 import Sign from '../../assets/img/sign.svg';
 import { useTranslation } from 'react-i18next';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import SignModal from '../Modal/SignModal';
 import {
   HeaderContainer,
@@ -24,6 +24,7 @@ const Header = () => {
   const history = useHistory();
   const [isMobileMenu, setIsMobileMenu] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [selectedPage, setSelectedPage] = useState(window.location.pathname);
 
   const linkTo = (url) => {
     setIsMobileMenu(false)
@@ -34,6 +35,12 @@ const Header = () => {
     setIsOpen(true);
   }
 
+  /***** desktop menu click event ******/
+  const desktopLinkTo = (url) => {
+    setSelectedPage(url);
+    history.push(url)
+  }
+
   return (
     <div>
       <EmptyDiv />
@@ -41,48 +48,42 @@ const Header = () => {
         <MenuIconBlock onClick={() => setIsMobileMenu(true)}>
           <MenuIcon />
         </MenuIconBlock>
-        <Link to="/">
-          <Logo src={LogoImg} alt="logo" />
-        </Link>
+        <Logo src={LogoImg} alt="logo" onClick={() =>desktopLinkTo('/')} />
         <SignInBlock src={Sign} />
         <HeaderMenu>
-          <Link to="/governance">
-            <MenuItem>{t('GOVERNANCE')}</MenuItem>
-          </Link>
-          <Link to="/stake">
-            <MenuItem>{t('STAKE')}</MenuItem>
-          </Link>
-          <Link to="/leaderboard">
-            <MenuItem>{t('LEADERBOARD')}</MenuItem>
-          </Link>
-          <Link to="/create">
-            <MenuItem>{t('CREATE_INDEX')}</MenuItem>
-          </Link>
+            <MenuItem className={selectedPage === '/liquidity' ? 'active' : 'item'} onClick={() => desktopLinkTo('/liquidity')}>LGE</MenuItem>
+            <MenuItem className={selectedPage === '/stake' ? 'active' : 'item'} onClick={() => desktopLinkTo('/stake')}>{t('STAKE')}</MenuItem>
+            <MenuItem className={selectedPage === '/leaderboard' ? 'active' : 'item'} onClick={() => desktopLinkTo('/leaderboard')}>{t('LEADERBOARD')}</MenuItem>
+            <MenuItem className={selectedPage === '/create' ? 'active' : 'item'} onClick={() => desktopLinkTo('/create')}>{t('CREATE_INDEX')}</MenuItem>
+            <MenuItem className={selectedPage === '/governance' ? 'active' : 'item'} onClick={() => desktopLinkTo('/governance')}><span className="comming-soon">comming soon</span>{t('GOVERNANCE')}</MenuItem>
           <Button onClick={openModal} className="white-btn">{t('WALLET')}</Button>
         </HeaderMenu>
         {
-        isMobileMenu &&
-        <>
-          <OverLay onClick={() => setIsMobileMenu(false)} />
-        </>
-      }
-      <MobileMenu style={{ width: isMobileMenu && '75%' }}>
-        <div>
-          <MobileImg src={LogoImg} alt="logo" onClick={() => linkTo('/')} />
-          <MobileItem onClick={() => linkTo('/governance')}>
-            <span>{t('GOVERNANCE')}</span>
-          </MobileItem>
-          <MobileItem onClick={() => linkTo('/stake')}>
-            <span>{t('STAKE')}</span>
-          </MobileItem>
-          <MobileItem onClick={() => linkTo('/leaderboard')}>
-            <span>{t('LEADERBOARD')}</span>
-          </MobileItem>
-          <MobileItem onClick={() => linkTo('/create')}>
-            <span>{t('CREATE_INDEX')}</span>
-          </MobileItem>
-        </div>
-      </MobileMenu>
+          isMobileMenu &&
+          <>
+            <OverLay onClick={() => setIsMobileMenu(false)} />
+          </>
+        }
+        <MobileMenu style={{ width: isMobileMenu && '75%' }}>
+          <div>
+            <MobileImg src={LogoImg} alt="logo" onClick={() => linkTo('/')} />
+            <MobileItem onClick={() => linkTo('/liquidity')}>
+              <span>LGE</span>
+            </MobileItem>
+            <MobileItem onClick={() => linkTo('/stake')}>
+              <span>{t('STAKE')}</span>
+            </MobileItem>
+            <MobileItem onClick={() => linkTo('/leaderboard')}>
+              <span>{t('LEADERBOARD')}</span>
+            </MobileItem>
+            <MobileItem onClick={() => linkTo('/create')}>
+              <span>{t('CREATE_INDEX')}</span>
+            </MobileItem>
+            <MobileItem onClick={() => linkTo('/governance')}>
+              <span>{t('GOVERNANCE')}</span>
+            </MobileItem>
+          </div>
+        </MobileMenu>
       </HeaderContainer>
       <SignModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
     </div>

@@ -32,7 +32,7 @@ function App() {
             <Route exact path='/governance' render={() => <Governance />} />
             <Route exact path='/governance/:id' render={() => <GovernanceItem />} />
             <Route exact path='/portfolio/:id' render={() => <Portfolio />} />
-            <Route exact path='/liquidityGeneration' render={() => <LiquidityGeneration />} />
+            <Route exact path='/liquidity' render={() => <LiquidityGeneration />} />
             <Route exact path='/userpage' render={() => <UserPage />} />
             <Redirect to='/' />
           </Switch>

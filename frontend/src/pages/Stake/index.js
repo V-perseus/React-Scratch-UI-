@@ -6,25 +6,27 @@ import AmountStake from '../../components/AmountStake';
 import './style.scss';
 
 const Stake = () => {
-  const [amount, setAmount] = useState('0.3')
+  const [amount, setAmount] = useState('1')
   const [inputVal, setInputVal] = useState('100');
-  const [isAmountStake, setIsAmountStake] = useState(false);
+  const [isGetReward, setIsGetReward] = useState(false);
+  const [stakeData, setStakeData] = useState([]);
 
   const amountStakeProps = {
     amount: amount,
     setAmount: setAmount,
     inputVal: inputVal,
     setInputVal: setInputVal,
-    setIsAmountStake: setIsAmountStake
+    setIsGetReward: setIsGetReward,
+    setStakeData: setStakeData,
+    stakeData: stakeData
   }
 
   return (
     <div className="stake-section">
       <PageHeader title="Stake" />
-      {
-        isAmountStake ? <AmountStake {...amountStakeProps} /> : <GetReward />
-      }
-      <StakeRewardAmount />
+      <AmountStake {...amountStakeProps} />
+      { isGetReward && <GetReward stakeData={stakeData} /> }
+      <StakeRewardAmount amount={amount} />
     </div>
   )
 }

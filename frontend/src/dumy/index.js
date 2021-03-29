@@ -5,7 +5,7 @@ export const byTypeExplore =
       "symbol": "yamHOUSE",
       "name": "Yam DAO House",
       "image": "https://set-core.s3.amazonaws.com/img/portfolios/yam_house.png",
-      "risk": "Risk5",
+      "risk": "Risk 5",
       "btc_index": {
         "max_drawdown": "-16.31%",
         "set_price": "0.002",
@@ -129,7 +129,7 @@ export const byTypeExplore =
       "symbol": "DPI",
       "name": "DeFi Pulse Index",
       "image": "https://set-core.s3.amazonaws.com/img/social_trader_set_icons/defi_pulse_index_set.svg",
-      "risk": "",
+      "risk": "Risk 5",
       "btc_index": {
         "max_drawdown": "-71.91%",
         "set_price": "0.007",
@@ -293,7 +293,7 @@ export const byTypeExplore =
       "symbol": "CGI",
       "name": "CoinShares Gold",
       "image": "https://set-core.s3.amazonaws.com/img/portfolios/coinshares_gold.png",
-      "risk": "Risk5",
+      "risk": "Risk 3",
       "btc_index": {
         "max_drawdown": "-22.98%",
         "set_price": "0.00211",
@@ -319,7 +319,7 @@ export const byTypeExplore =
       "usd_index": {
         "max_drawdown": "-18.29%",
         "set_price": "106.92",
-        "market_cap": "426023.3",
+        "market_cap": "42602.3",
         "daily_percent_change": "0.83%",
         "week_percent_change": "-2.28%",
         "month_percent_change": "-",
@@ -377,7 +377,7 @@ export const byTypeExplore =
       "symbol": "WBTCAPY",
       "name": "ETH WBTC Yield Farm",
       "image": "https://set-core.s3.amazonaws.com/img/portfolios/eth_wbtc_lp_yield_set.svg",
-      "risk": "Risk5",
+      "risk": "Risk 3",
       "btc_index": {
         "max_drawdown": "-17.15%",
         "set_price": "0.0993",
@@ -451,7 +451,7 @@ export const byTypeExplore =
       "symbol": "USDAPY",
       "name": "ETH USD Yield Farm",
       "image": "https://set-core.s3.amazonaws.com/img/portfolios/eth_usd_lp_yield_set.svg",
-      "risk": "Risk5",
+      "risk": "Risk 1",
       "btc_index": {
         "max_drawdown": "-47.97%",
         "set_price": "0.00551",

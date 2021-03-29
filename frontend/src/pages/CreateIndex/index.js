@@ -8,8 +8,11 @@ import './style.scss';
 const CreateIndex = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [tokenVal, setTokenVal] = useState([]);
-  const [details, setDetails] = useState({ name: '', symbol: '', price: "100" });
+  const [details, setDetails] = useState({ name: '', symbol: '' });
   const [userImg, setUserImg] = useState('');
+
+  // validations status variable
+  const [isDetail, setIsDetail] = useState(true);
 
   /****** AddTokens props ******/
   const tokenProps = {
@@ -22,7 +25,8 @@ const CreateIndex = () => {
     details: details,
     setDetails: setDetails,
     userImg: userImg,
-    setUserImg: setUserImg
+    setUserImg: setUserImg,
+    isDetail: isDetail
   }
 
   /****** publish index props */
@@ -37,7 +41,11 @@ const CreateIndex = () => {
   const goNextStep = () => {
     if (currentStep === 3) return;
     if (currentStep === 1 && tokenVal.length === 0) return;
-    if (currentStep === 2 && (details['name'] === '' || details['symbol'] === '' || details['price'] === '' || userImg === '')) return;
+    if (currentStep === 2 && (details['name'] === '' || details['symbol'] === '' || userImg === '')) { 
+      setIsDetail(false);
+      return;
+    }
+    setIsDetail(true);
     setCurrentStep(currentStep + 1);
   }
 
@@ -52,13 +60,17 @@ const CreateIndex = () => {
       <div className="create-index-section mx-auto position-relative">
         <div>
           <div className="step-status-section d-flex align-items-center justify-content-center">
-            <div className={currentStep === 1 ? 'active' : ''} onClick={() => beforeStepCheck(1)}></div>
-            <div className={currentStep === 2 ? 'active' : ''} onClick={() => beforeStepCheck(2)}></div>
+            <div className={currentStep === 1 ? 'active' : ''} onClick={() => beforeStepCheck(1)} style={{cursor: currentStep > 1 ? 'pointer' : 'default'}}></div>
+            <div className={currentStep === 2 ? 'active' : ''} onClick={() => beforeStepCheck(2)} style={{cursor: currentStep > 2 ? 'pointer' : 'default'}}></div>
             <div className={currentStep === 3 ? 'active' : ''} onClick={() => beforeStepCheck(3)}></div>
           </div>
-          <div className="next-btn d-flex align-items-center justify-content-center" onClick={goNextStep}>
-            <img src={nextBtnImg} alt="nextImg" />
-          </div>
+          {
+            currentStep < 3 &&
+            <div className="next-btn d-flex align-items-center justify-content-center" onClick={goNextStep}>
+              <img src={nextBtnImg} alt="nextImg" />
+            </div>
+          }
+          
           {currentStep === 1 && <AddTokens {...tokenProps} />}
           {currentStep === 2 && <AddDetails {...detailsProps} />}
           {currentStep === 3 && <PublishIndex {...publishProps} />}

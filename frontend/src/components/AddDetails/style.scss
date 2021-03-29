@@ -48,15 +48,35 @@ Add details
         display: none;
       }
       button {
-        label {
-          cursor: pointer;
-          margin-bottom: 0px;
-        }
-        width: 170px;
-        height: 45px;
+        font-weight: 600;
+        font-size: 18px;
+        width: 248px;
+        height: 50px;
         @media (max-width: 576px) {
           width: 100%;
         }
+        svg {
+          margin-right: 18px;
+        }
+        &:hover svg {
+          color: #4F4CD1;
+        }
+      }
+    }
+
+    .user-index-img {
+      margin-top: 25px;
+      position: relative;
+      img {
+        width: 137px;
+        height: 137px;
+        border-radius: 50%;
+      }
+      .close-icon {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        cursor: pointer;
       }
     }
   }

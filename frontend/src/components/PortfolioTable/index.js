@@ -54,7 +54,7 @@ const PortfolioTable = (props) => {
                 </td>
                 <td>{cryptoValues['components']['quantities'][item['id']][`${position}`]} {item['symbol']}</td>
                 <td>${cryptoValues['components']['prices'][item['id']][`${position}`]}</td>
-                <td>sdf</td>
+                <td>35%</td>
                 <td>
                   <div className="d-flex align-items-center percent-change-section">
                     <img src={upArrowImg} alt="updownImg" />
@@ -65,7 +65,9 @@ const PortfolioTable = (props) => {
               </tr>
               <tr className="percent-color-section">
                 <td colSpan="6">
-                  <div style={{ width: `${item['percent_of_set']}%`, background: `linear-gradient(85.93deg, #${item['colors'][0]} -1.39%, #${item['colors'][1]}  100%)` }}></div>
+                  <div>
+                    <div style={{ width: `${item['percent_of_set']}%`, background: `#${item['colors'][0]}` }}></div>
+                  </div>
                 </td>
               </tr>
             </tbody>) :
@@ -79,7 +81,7 @@ const PortfolioTable = (props) => {
                   </td>
                   <td>{cryptoValues['components']['quantities'][item['id']][`${position}`]} {item['symbol']}</td>
                   <td>${cryptoValues['components']['prices'][item['id']][`${position}`]}</td>
-                  <td>sdf</td>
+                  <td>35%</td>
                   <td>
                     <div className="d-flex align-items-center percent-change-section">
                       <img src={upArrowImg} alt="updownImg" />
@@ -90,7 +92,9 @@ const PortfolioTable = (props) => {
                 </tr>
                 <tr className="percent-color-section">
                   <td colSpan="6">
-                    <div style={{ width: `${item['percent_of_set']}%`, background: `linear-gradient(85.93deg, #${item['colors'][0]} -1.39%, #${item['colors'][1]}  100%)` }}></div>
+                    <div>
+                      <div style={{ width: `${item['percent_of_set']}%`, background: `#${item['colors'][0]}` }}></div>
+                    </div>
                   </td>
                 </tr>
               </tbody>

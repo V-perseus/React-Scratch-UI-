@@ -16,25 +16,24 @@ export const HeaderContainer = styled(BetweenDiv)`
 `;
 
 export const Logo = styled.img`
-  margin: 0 auto;
+  cursor: pointer;
+  margin: 0;
   height: 52px;
   width: auto;
 `;
 
 export const HeaderMenu = styled(BetweenDiv)`
   display: flex;
+  cursor: pointer;
   @media (max-width: 768px) {
     display: none;
   }
-  & > a {
-    margin-right: 27px;
-    &: hover {
-      text-decoration: none;
-    }
   }
 `;
 
 export const MenuItem = styled.span`
+  margin-right: 27px;
+  position: relative;
   font-family: Inter;
   font-style: normal;
   font-weight: 500;
@@ -44,6 +43,31 @@ export const MenuItem = styled.span`
   transition: 0.2s;
   &: hover {
     color: #2D2CE5;
+  }
+  &::before {
+    position: absolute;
+    bottom: -3px !important;
+    height: 2px;
+    content: '';
+    background-color: #4F4CD1 !important;
+    width: 0px;
+    left: 0 !important;
+    right: 0 !important;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+  }
+  &.active::before {
+    width: 100% !important;
+  }
+  & > .comming-soon {
+    position: absolute;
+    left: 0px;
+    top: -12px;
+    font-weight: 500;
+    font-size: 9px;
+    color: #0B0A3C !important;
+    width: 100%;
+    text-align: right;
   }
 `;
 
@@ -91,7 +115,7 @@ export const MobileMenu = styled.div`
 
 export const MobileImg = styled.img`
     padding-bottom: 25px;
-    width: 160px;
+    width: 100%;
 `;
 
 export const MobileItem = styled.div`
@@ -102,7 +126,7 @@ export const MobileItem = styled.div`
         font-size: 24px !important;
         margin-top: 24px !important;
         margin-bottom: 24px !important;
-        transition: 0.2s
+        transition: 0.2s;
     }
 `;
 

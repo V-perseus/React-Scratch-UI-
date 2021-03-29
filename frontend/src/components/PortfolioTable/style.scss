@@ -55,6 +55,7 @@
         }
         td:first-child {
           padding-left: 30px;
+          padding-right: 30px;
           > div {
             img {
               width: 25px;
@@ -77,11 +78,16 @@
             td {
               padding-top: 23px;
               padding-bottom: 23px;
-              div {
+              > div {
                 transition: all 0.3s;
                 height: 10px;
-                background: #2EBAC6;
+                background: #F6F6FA;
                 border-radius: 100px;
+                > div {
+                  transition: all 0.3s;
+                  height: 10px;
+                  border-radius: 100px;
+                }
               }
             }
           }

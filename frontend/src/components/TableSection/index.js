@@ -4,6 +4,7 @@ import {
   Table,
   HeadSpan,
   Th,
+  NumberTh,
   HeadIconDiv,
   HeadUpDownIcon,
   TBody,
@@ -20,10 +21,9 @@ import {
   SymbolSpanTag,
   SymbolDivTag,
   PercentSpanTag,
-  OverlayDiv,
   OverlaySpanTag,
-  PercentColorDiv,
-  TableBlock
+  TableBlock,
+  NoData
 } from './style';
 import downArrowImg from '../../assets/img/downarrow.svg';
 import upArrowImg from '../../assets/img/uparrow.svg';
@@ -32,13 +32,14 @@ import { useHistory } from 'react-router-dom';
 const TableSection = (props) => {
   const history = useHistory();
   const { t } = useTranslation();
-  const { typeExplore, setTypeExplore, currency } = props;
+  const { typeExplore, setTypeExplore, currency, isFlag } = props;
   const [sortDirections, setSortDirections] = useState({
     market_cap: false,
     set_price: false,
     week_percent_change: false,
     cumulative_change: false,
-    risk: false
+    risk: false,
+    daily_percent_change: false
   })
 
   /******* perceent color display *******/
@@ -47,7 +48,7 @@ const TableSection = (props) => {
       <>
         {parseFloat(percentVal) > 0 && <BodyUpDownIcon src={upArrowImg} />}
         {parseFloat(percentVal) < 0 && <BodyUpDownIcon src={downArrowImg} />}
-        <PriceSpanTag style={{ color: setTextColor(percentVal) }}>{convert(percentVal)}</PriceSpanTag>
+        <PriceSpanTag style={{ color: setTextColor(percentVal), fontSize: isFlag ? "20px" : "14px" }}>{convert(percentVal)}</PriceSpanTag>
       </>
     )
   }
@@ -102,114 +103,124 @@ const TableSection = (props) => {
     setTypeExplore(_typeExplore)
   }
 
+  const reskBorderColor = (status) => {
+    switch (status) {
+      case 'Risk 1':
+        return '#16C784';
+      case 'Risk 3':
+        return '#FF8A00';
+      case 'Risk 5':
+        return '#FF003D';
+      default:
+        return '#F6F6FA'
+    }
+  }
+
   return (
     <TableBlock>
-      <Table>
-        <thead>
-          <tr>
-            <Th>
-              <HeadSpan>{t('NAME')}</HeadSpan>
-            </Th>
-            <Th>
-              <HeadIconDiv onClick={() => tableSort('market_cap')}>
-                <HeadSpan>{t('MARKET_CAP')}</HeadSpan>
-                <HeadUpDownIcon src={downArrowImg} alt="UpDownImg" />
-              </HeadIconDiv>
-            </Th>
-            <Th>
-              <HeadIconDiv onClick={() => tableSort('set_price')}>
-                <HeadSpan>{t('PRICE')}</HeadSpan>
-                <HeadUpDownIcon src={downArrowImg} alt="UpDownImg" />
-              </HeadIconDiv>
-            </Th>
-            <Th>
-              <HeadIconDiv onClick={() => tableSort('week_percent_change')}>
-                <HeadSpan>1{t('WEEK')}</HeadSpan>
-                <HeadUpDownIcon src={downArrowImg} alt="UpDownImg" />
-              </HeadIconDiv>
-            </Th>
-            <Th>
-              <HeadIconDiv onClick={() => tableSort('cumulative_change')}>
-                <HeadSpan>{t('SINCE_INCEPTION')}</HeadSpan>
-                <HeadUpDownIcon src={downArrowImg} alt="UpDownImg" />
-              </HeadIconDiv>
-            </Th>
-            <Th>
-              <HeadIconDiv onClick={() => riskSort('risk')}>
-                <HeadSpan>{t('RISK')}</HeadSpan>
-                <HeadUpDownIcon src={downArrowImg} alt="UpDownImg" />
-              </HeadIconDiv>
-            </Th>
-          </tr>
+      { typeExplore.length > 0 ?
+        <Table>
+          <thead>
+            <tr>
+              <NumberTh></NumberTh>
+              <Th>
+                <HeadSpan>{t('NAME')}</HeadSpan>
+              </Th>
+              <Th>
+                <HeadIconDiv onClick={() => tableSort('market_cap')}>
+                  <HeadSpan>{t('MARKET_CAP')}</HeadSpan>
+                  <HeadUpDownIcon src={downArrowImg} alt="UpDownImg" />
+                </HeadIconDiv>
+              </Th>
+              <Th>
+                <HeadIconDiv onClick={() => tableSort('set_price')}>
+                  <HeadSpan>{t('PRICE')}</HeadSpan>
+                  <HeadUpDownIcon src={downArrowImg} alt="UpDownImg" />
+                </HeadIconDiv>
+              </Th>
+              <Th>
+                <HeadIconDiv onClick={() => tableSort(isFlag ? 'week_percent_change' : 'daily_percent_change')}>
+                  <HeadSpan>1 {isFlag ? 'Day' : t('WEEK')}</HeadSpan>
+                  <HeadUpDownIcon src={downArrowImg} alt="UpDownImg" />
+                </HeadIconDiv>
+              </Th>
+              <Th>
+                <HeadIconDiv onClick={() => tableSort('cumulative_change')}>
+                  <HeadSpan>{t('SINCE_INCEPTION')}</HeadSpan>
+                  <HeadUpDownIcon src={downArrowImg} alt="UpDownImg" />
+                </HeadIconDiv>
+              </Th>
+              <Th>
+                <HeadIconDiv onClick={() => riskSort('risk')} style={{ justifyContent: "center" }}>
+                  <HeadSpan>{t('RISK')}</HeadSpan>
+                  <HeadUpDownIcon src={downArrowImg} alt="UpDownImg" />
+                </HeadIconDiv>
+              </Th>
+            </tr>
 
-        </thead>
-        {
-          typeExplore.map((item, i) => (
-            <TBody key={i} onClick={() => history.push(`/portfolio/${item['id']}`)}>
-              <tr>
-                <FirstTd>
-                  <img src={item['image']} alt={item['id']} />
-                  <NameSpanTag>{item['name']}</NameSpanTag>
-                </FirstTd>
-                <Td>
-                  <MarketCapSpanTag><CurrenctSetting /> {item[currency]['market_cap']}</MarketCapSpanTag>
-                </Td>
-                <Td>
-                  <PriceSpanTag><CurrenctSetting /> {item[currency]['set_price']}</PriceSpanTag>
-                </Td>
-                <Td>
-                  <PrecentDivTag>
-                    {PercentDispaly(item[currency]['week_percent_change'])}
-                  </PrecentDivTag>
-                </Td>
-                <Td>
-                  <PrecentDivTag>
-                    {PercentDispaly(item[currency]['cumulative_change'])}
-                  </PrecentDivTag>
-                </Td>
-                <Td>
-                  <RiskDiv>
-                    {item['risk']}
-                  </RiskDiv>
-                </Td>
-              </tr>
-              <tr>
-                <FirstTd></FirstTd>
-                <PercentTd colSpan="5">
-                  <div className="d-flex">
+          </thead>
+          {
+            typeExplore.map((item, i) => (
+              <TBody key={i} onClick={() => history.push(`/portfolio/${item['id']}`)}>
+                <tr>
+                  <NumberTh rowSpan="2"><div><div className={`num-${i + 1}`}>{i + 1}</div></div></NumberTh>
+                  <FirstTd rowSpan={isFlag ? "2" : ""}>
+                    <div className="d-flex align-items-center">
+                      <img src={item['image']} alt={item['id']} />
+                      <NameSpanTag>{item['name']}</NameSpanTag>
+                    </div>
+                  </FirstTd>
+                  <Td>
+                    <MarketCapSpanTag style={{ fontSize: isFlag ? "19px" : "14px" }}><CurrenctSetting /> {item[currency]['market_cap']}</MarketCapSpanTag>
+                  </Td>
+                  <Td>
+                    <PriceSpanTag style={{ fontSize: isFlag ? "19px" : "14px" }}><CurrenctSetting /> {item[currency]['set_price']}</PriceSpanTag>
+                  </Td>
+                  <Td>
+                    <PrecentDivTag>
+                      {PercentDispaly(item[currency][isFlag ? 'daily_percent_change' : 'week_percent_change'])}
+                    </PrecentDivTag>
+                  </Td>
+                  <Td>
+                    <PrecentDivTag>
+                      {PercentDispaly(item[currency]['cumulative_change'])}
+                    </PrecentDivTag>
+                  </Td>
+                  <Td>
                     {
-                      item['components'].map((listItem, j) => (
-                        j < 3 && <SymbolDivTag key={j}>
-                          <SymbolImgTag src={listItem['image']} alt={listItem['id']} />
-                          <SymbolSpanTag>{listItem['symbol']}</SymbolSpanTag>
-                          <PercentSpanTag>{listItem['percent_of_set']}%</PercentSpanTag>
-                        </SymbolDivTag>
-                      ))
+                      item['risk'] !== '' &&
+                      <RiskDiv style={{ fontSize: isFlag ? "18px" : "12px", borderRadius: isFlag ? "100px" : "10px", border: `1px solid ${reskBorderColor(item['risk'])}` }}>
+                        {item['risk']}
+                      </RiskDiv>
                     }
-                    <SymbolDivTag>
+                  </Td>
+                </tr>
+                <tr>
+                  {!isFlag && <FirstTd className="pt-0 pb-0"></FirstTd>}
+                  <PercentTd colSpan="5" style={{ paddingBottom: isFlag ? "28px" : "18px" }}>
+                    <div className={isFlag ? "d-flex  leaderboard" : "d-flex "}>
                       {
-                        item['components'].length > 3 && item['components'].map((listItem, j) => (
-                          j > 3 &&
-                          <OverlayDiv style={{ zIndex: `${100 - j}` }} key={j}>
+                        item['components'].map((listItem, j) => (
+                          j < (isFlag ? 4 : 5) && <SymbolDivTag key={j} style={{ width: isFlag ? '20%' : '16.6%', paddingLeft: '30px' }}>
                             <SymbolImgTag src={listItem['image']} alt={listItem['id']} />
-                          </OverlayDiv>
+                            <SymbolSpanTag>{listItem['symbol']}</SymbolSpanTag>
+                            <PercentSpanTag>{listItem['percent_of_set']}%</PercentSpanTag>
+                          </SymbolDivTag>
                         ))
                       }
-                      <OverlaySpanTag>{item['components'].length > 3 && `+${item['components'].length - 3} more`}</OverlaySpanTag>
-                    </SymbolDivTag>
-                  </div>
-                  <PercentColorDiv>
-                    {item['components'].length > 0 && item['components'].map((childItem, l) => (
-                      <div style={{ width: `${childItem['percent_of_set']}%`, backgroundColor: `#${childItem['colors']['0']}` }} key={l}></div>
-                    ))}
-                  </PercentColorDiv>
-                </PercentTd>
-              </tr>
-            </TBody>
-          ))
-        }
+                      <SymbolDivTag className="justify-content-end" style={{ width: isFlag ? '20%' : '16.6%', paddingLeft: '30px' }}>
+                        <OverlaySpanTag>{item['components'].length > 4 && `+${item['components'].length - 4} more`}</OverlaySpanTag>
+                      </SymbolDivTag>
+                    </div>
+                  </PercentTd>
+                </tr>
+              </TBody>
+            ))
+          }
 
-      </Table>
+        </Table> :
+        <NoData>No filtered sets available.</NoData>
+      }
     </TableBlock>
 
   )
